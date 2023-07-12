@@ -12,7 +12,7 @@ public class Car
 
   public string Body { get; set; }
 
-  public int Price { get; set; }
+  public int? Price { get; set; }
 
   public string UserId { get; set; }
 }

@@ -55,4 +55,19 @@ LIMIT 1
 ;";
     _db.Execute(sql, new { carId });
   }
+
+  internal void EditCar(Car oldCar)
+  {
+    string sql = @"
+UPDATE cars
+SET
+make = @Make,
+model = @Model,
+imgUrl = @ImgUrl,
+body = @Body,
+price = @Price
+WHERE id = @Id
+;";
+    _db.Execute(sql, oldCar);
+  }
 }
