@@ -13,11 +13,12 @@ public class CarsRepository
   {
     string sql = @"
 INSERT INTO cars
-  (make,model,imgUrl,body,price,userId)
+  (make, model, imgUrl, body, price, userId)
 values
-  (@make,@model,@imgUrl,@body,@price,@userId)
+  (@make, @model, @imgUrl, @body, @price, @userId);
   SELECT LAST_INSERT_ID()
 ;";
+
     int id = _db.ExecuteScalar<int>(sql, carData);
     carData.Id = id;
     return carData;
