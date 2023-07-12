@@ -27,4 +27,12 @@ public class CarsService
     if (car == null) throw new Exception($"The Car you are trying to get, with the ID: {carId}, does not exist!");
     return car;
   }
+
+  internal string DeleteCar(int carId, string userId)
+  {
+    Car car = GetOneCar(carId);
+    if (car.UserId != userId) throw new Exception("You are not Authorized to delete this Car");
+    _repo.DeleteCar(carId);
+    return $"You have Deleted the Car with ID: {carId}";
+  }
 }

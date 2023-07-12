@@ -44,4 +44,15 @@ WHERE id = @carId
     Car car = _db.Query<Car>(sql, new { carId }).FirstOrDefault();
     return car;
   }
+
+  internal void DeleteCar(int carId)
+  {
+    string sql = @"
+DELETE
+FROM cars
+WHERE id = @carId
+LIMIT 1
+;";
+    _db.Execute(sql, new { carId });
+  }
 }
