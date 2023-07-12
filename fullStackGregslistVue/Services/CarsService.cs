@@ -20,4 +20,11 @@ public class CarsService
     List<Car> cars = _repo.GetAllCars();
     return cars;
   }
+
+  internal Car GetOneCar(int carId)
+  {
+    Car car = _repo.GetOneCar(carId);
+    if (car == null) throw new Exception($"The Car you are trying to get, with the ID: {carId}, does not exist!");
+    return car;
+  }
 }

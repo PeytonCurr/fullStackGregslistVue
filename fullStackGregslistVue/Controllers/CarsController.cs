@@ -44,4 +44,17 @@ public class CarsController : ControllerBase
     }
   }
 
+  [HttpGet("{carId}")]
+  public ActionResult<Car> GetOneCar(int carId)
+  {
+    try
+    {
+      Car car = _carsService.GetOneCar(carId);
+      return Ok(car);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 }
