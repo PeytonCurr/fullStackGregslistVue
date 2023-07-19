@@ -1,5 +1,5 @@
 import { AppState } from "../AppState.js"
-import { Car } from "../models/Cars.js"
+import { Car } from "../models/Car.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
