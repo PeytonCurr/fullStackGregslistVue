@@ -1,12 +1,14 @@
 <template>
-  <div class="card p-2 ">
-    <h3 class="text-start">${{ car?.price }}</h3>
+  <router-link :to="{ name: 'CarDetails', params: { carId: car.id } }">
+    <div class="card p-2 bg-white elevation-3">
+      <h3 class="text-start">${{ car?.price }}</h3>
 
-    <h5 class="text-dark text-start">{{ car?.make }} | {{ car?.model }} | {{ car?.body }}</h5>
+      <h5 class="text-dark text-start">{{ car?.make }} | {{ car?.model }} | {{ car?.body }}</h5>
 
-    <img :src=car?.imgUrl alt="Car Pic" class="img-fluid carPic">
+      <img :src=car?.imgUrl alt="Car Pic" class="img-fluid carPic">
 
-  </div>
+    </div>
+  </router-link>
 </template>
 
 
