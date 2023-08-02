@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'CarDetails', params: { carId: car.id } }">
+  <router-link :to="{ name: 'CarDetail', params: { carId: car.id } }">
     <div class="card p-2 bg-white elevation-3">
       <h3 class="text-start">${{ car?.price }}</h3>
 
