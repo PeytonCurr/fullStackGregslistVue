@@ -20,8 +20,9 @@ public class CarsController : ControllerBase
     try
     {
       Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-      carData.UserId = userInfo.Id;
+      carData.CreatorId = userInfo.Id;
       Car car = _carsService.createCar(carData);
+      car.Seller = userInfo;
       return Ok(car);
     }
     catch (Exception e)
@@ -81,7 +82,7 @@ public class CarsController : ControllerBase
     try
     {
       Account userInfo = await _auth.GetUserInfoAsync<Account>(HttpContext);
-      carData.UserId = userInfo?.Id;
+      carData.CreatorId = userInfo?.Id;
       carData.Id = carId;
       Car car = _carsService.EditCar(carData);
       return Ok(car);

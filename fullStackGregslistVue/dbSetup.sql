@@ -19,5 +19,6 @@ Create TABLE
         imgUrl VARCHAR(255) NOT NULL,
         body VARCHAR(255) NOT NULL,
         price INT NOT NULL,
-        userId VARCHAR(255) NOT NULL
+        description VARCHAR(500) NOT NULL,
+        creatorId VARCHAR(255) NOT NULL
     ) default charset utf8mb4 COMMENT '';

@@ -31,7 +31,7 @@ public class CarsService
   internal string DeleteCar(int carId, string userId)
   {
     Car car = GetOneCar(carId);
-    if (car.UserId != userId) throw new Exception("You are not Authorized to delete this Car");
+    if (car.CreatorId != userId) throw new Exception("You are not Authorized to delete this Car");
     _repo.DeleteCar(carId);
     return $"You have Deleted the Car with ID: {carId}";
   }
@@ -39,13 +39,14 @@ public class CarsService
   internal Car EditCar(Car carData)
   {
     Car oldCar = GetOneCar(carData.Id);
-    if (oldCar.UserId != carData.UserId) throw new Exception("You are not Authorized to edit this Car");
+    if (oldCar.CreatorId != carData.CreatorId) throw new Exception("You are not Authorized to edit this Car");
 
     oldCar.Make = carData.Make ?? oldCar.Make;
     oldCar.Model = carData.Model ?? oldCar.Model;
     oldCar.ImgUrl = carData.ImgUrl ?? oldCar.ImgUrl;
     oldCar.Body = carData.Body ?? oldCar.Body;
     oldCar.Price = carData.Price != null ? carData.Price : oldCar.Price;
+    oldCar.Description = carData.Description ?? oldCar.Description;
 
     _repo.EditCar(oldCar);
 

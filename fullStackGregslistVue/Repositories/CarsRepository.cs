@@ -13,9 +13,9 @@ public class CarsRepository
   {
     string sql = @"
 INSERT INTO cars
-  (make, model, imgUrl, body, price, userId)
+  (make, model, imgUrl, body, price, description, creatorId)
 values
-  (@make, @model, @imgUrl, @body, @price, @userId);
+  (@make, @model, @imgUrl, @body, @price, @description, @creatorId);
   SELECT LAST_INSERT_ID()
 ;";
 
@@ -27,21 +27,35 @@ values
   internal List<Car> GetAllCars()
   {
     string sql = @"
-SELECT *
-FROM cars
+SELECT
+c.*,
+acct.*
+FROM cars c
+JOIN accounts acct ON acct.id = c.creatorId
 ;";
-    List<Car> cars = _db.Query<Car>(sql).ToList();
+    List<Car> cars = _db.Query<Car, Profile, Car>(sql, (c, acct) =>
+    {
+      c.Seller = acct;
+      return c;
+    }).ToList();
     return cars;
   }
 
   internal Car GetOneCar(int carId)
   {
     string sql = @"
-SELECT *
-FROM cars
-WHERE id = @carId
+SELECT
+c.*,
+acct.*
+FROM cars c
+JOIN accounts acct ON acct.id = c.creatorId
+WHERE c.id = @carId
 ;";
-    Car car = _db.Query<Car>(sql, new { carId }).FirstOrDefault();
+    Car car = _db.Query<Car, Profile, Car>(sql, (c, acct) =>
+    {
+      c.Seller = acct;
+      return c;
+    }, new { carId }).FirstOrDefault();
     return car;
   }
 
@@ -65,7 +79,8 @@ make = @Make,
 model = @Model,
 imgUrl = @ImgUrl,
 body = @Body,
-price = @Price
+price = @Price,
+description = @Description
 WHERE id = @Id
 ;";
     _db.Execute(sql, oldCar);

@@ -1,3 +1,5 @@
+import { Profile } from "./Account.js"
+
 export class Car {
   constructor(data) {
     this.id = data.id
@@ -6,6 +8,8 @@ export class Car {
     this.imgUrl = data.imgUrl
     this.body = data.body
     this.price = data.price
-    this.userId = data.userId
+    this.description = data.description
+    this.creatorId = data.creatorId
+    this.seller = new Profile(data.seller)
   }
 }
