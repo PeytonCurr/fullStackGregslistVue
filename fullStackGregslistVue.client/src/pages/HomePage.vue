@@ -1,5 +1,5 @@
 <template>
-  <section class="row">
+  <section class="row m-1">
 
     <div class="col-4 p-2" v-for="car in cars">
 
@@ -8,6 +8,12 @@
 
     </div>
 
+  </section>
+
+  <section class="row m-1">
+    <div class="col-12 d-flex justify-content-end">
+      <button class="btn btn-success"> Add Car</button>
+    </div>
   </section>
 </template>
 
